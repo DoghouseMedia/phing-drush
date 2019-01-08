@@ -1,15 +1,15 @@
 {
-    "name": "jorgegc/phing-drush",
+    "name": "doghouseagency/phing-drush",
     "description": "A collection of Drush targets for Phing.",
     "keywords": [
         "phing",
         "drush"
     ],
-    "homepage": "https://github.com/jorgegc/phing-drush",
+    "homepage": "https://github.com/DoghouseMedia/phing-drush",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/jorgegc/phing-drush",
-        "source": "https://github.com/jorgegc/phing-drush"
+        "issues": "https://github.com/DoghouseMedia/phing-drush",
+        "source": "https://github.com/DoghouseMedia/phing-drush"
     },
     "require": {
         "drush/drush": "~9.0"
