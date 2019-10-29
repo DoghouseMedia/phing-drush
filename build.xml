@@ -7,6 +7,7 @@
   <property name="drush.alias.file.source" value="${project.basedir}/example.site.yml" />
   <property name="drush.alias.dir"         value="${env.HOME}/.drush/sites" />
   <property name="drush.alias.file.dest"   value="${drush.alias.dir}/${phing.project.name}.site.yml" />
+  <property name="drush.alias.file.dest_self"   value="${project.basedir}/drush/sites/self.site.yml" />
 
   <!-- ## Targets -->
 
@@ -15,11 +16,18 @@
     <mkdir dir="${drush.alias.dir}" />
     <copy file="${drush.alias.file.source}"
           tofile="${drush.alias.file.dest}"
-          overwrite="true">
+          overwrite="true">     
       <filterchain>
         <expandproperties />
       </filterchain>
     </copy>
+    <copy file="${drush.alias.file.source}"
+          tofile="${drush.alias.file.dest_self}"
+          overwrite="false">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+  </copy>
   </target>
 
 </project>
