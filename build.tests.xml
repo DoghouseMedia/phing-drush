@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="drush-tests" default="tests:run">
+
+  <!-- ## Properties -->
+
+  <property name="tests.bin"          value="${project.basedir}/docroot/core/scripts/run-tests.sh" />
+  <property name="tests.localaddress" value="0.0.0.0:8888" />
+  <property name="tests.localurl"     value="http://localhost:8888/" />
+  <property name="tests.docroot"      value="docroot" />
+  <property name="tests.db"           value="/tmp/tests-db.sqlite" />
+  <property name="tests.dburl"        value="sqlite://localhost//tmp/tests-db.sqlite" />
+  <property name="tests.suite"        value="minimal" />
+
+  <!-- ## Targets -->
+
+  <target name="tests:run"
+          description="Runs all the automated tests for this suite.">
+    <!-- Stop the webserver just for running the browser tests -->
+    <exec command="php -S ${tests.localaddress} -t ${tests.docroot}" spawn="true"/>
+    <!-- Run the tests -->
+    <exec command="php ${tests.bin} --php php -- --url ${tests.localurl} --sqlite ${tests.db} --dburl ${tests.dburl} --suppress-deprecations ${tests.suite}"
+          passthru="true"
+          checkreturn="true" />
+    <!-- Cleanup any created test files -->
+    <exec command="php ${tests.bin} --php php -- --sqlite ${tests.db} --clean --dburl ${tests.dburl} --verbose"/>
+    <!-- Stop the webserver for running the tests -->
+    <exec command="pkill -f 'php -S ${tests.localaddress} -t ${tests.docroot}'"/>
+  </target>
+
+</project>
